@@ -1,0 +1,53 @@
+<script setup lang="js">
+import { ref, defineProps } from 'vue';
+import Laufschrift from './Laufschrift.vue';
+const props=defineProps({
+    arrival: Object,
+    currentTime: Number,
+    type: String
+});
+
+function textColor() {
+    const r = (props.arrival.routeColor >> 16) & 0xff
+    const g = (props.arrival.routeColor >> 8) & 0xff
+    const b = props.arrival.routeColor & 0xff
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000
+    return brightness > 128 ? "#000000" : "#ffffff"
+}
+
+function formatDepartureSmart(arrival, currentTime) {
+    let diff=arrival-currentTime;
+
+    if (diff <= 0) return "jetzt";
+
+
+    const seconds = Math.floor(diff / 1000);
+    if(seconds<60)
+        return `${seconds} s`;
+
+    const minutes = Math.floor(diff / 60000);
+
+    if (minutes < 60)
+        return `${minutes} min`;
+
+    const date = new Date(arrival);
+
+    return date.toLocaleTimeString("de-DE", {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+}
+const platformmapping={
+    "Zug": "Gl",
+    "U": "Gl",
+    "S": "Gl",
+    "Tram": "Hst",
+    "Bus": "Hst",
+    "Fähre": "Anl"
+}
+</script>
+<template>
+    <span class="linie" :style="{'background-color':'#'+props.arrival.routeColor.toString(16).padStart(6,'0'), 'color': textColor() }">{{ props.arrival.routeNumber }}</span> - <Laufschrift :text="props.arrival.destination"></Laufschrift> - {{ platformmapping[props.type] }}. {{ props.arrival.platformName }} - {{ formatDepartureSmart(props.arrival.arrival, props.currentTime) }}
+</template>
+<style scoped>
+</style>
