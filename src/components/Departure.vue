@@ -47,7 +47,25 @@ const platformmapping={
 }
 </script>
 <template>
-    <span class="linie" :style="{'background-color':'#'+props.arrival.routeColor.toString(16).padStart(6,'0'), 'color': textColor() }">{{ props.arrival.routeNumber }}</span> - <Laufschrift :text="props.arrival.destination"></Laufschrift> - {{ platformmapping[props.type] }}. {{ props.arrival.platformName }} - {{ formatDepartureSmart(props.arrival.arrival, props.currentTime) }}
+    <div class="departurewrapper">
+        <span class="linie" :style="{'background-color':'#'+props.arrival.routeColor.toString(16).padStart(6,'0'), 'color': textColor() }">{{ props.arrival.routeNumber }}</span> <Laufschrift class="laufschrift" :text="props.arrival.destination"></Laufschrift> <span class="platformnumber">{{ platformmapping[props.type] }}. {{ props.arrival.platformName }}</span><span class="date">{{ formatDepartureSmart(props.arrival.arrival, props.currentTime) }}</span>
+    </div>
 </template>
 <style scoped>
+.linie {
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.departurewrapper{
+    font-size: 20px;
+}
+.date {
+    float: right;
+
+}
+.platformnumber {
+    float: right;
+    margin-left: 20px;
+}
 </style>

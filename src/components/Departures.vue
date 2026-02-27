@@ -48,9 +48,9 @@ function getImage(type){
 <template>
     <div v-if="!initialized">Initializing...</div>
     <div v-else-if="props.routes.length>0" class="wrapper">
-        <div>
+        <div class="header">
             <img :src="getImage(props.type)"/>
-            <span>{{ typeMapping[props.type] }}</span>
+            <span class="headline">{{ typeMapping[props.type] }}</span>
         </div>
         <div class="arrivals" v-for="arrival, i in arrivals.data.arrivals" :key="i" >
             <div class="arrival" v-if="arrival.routeName.startsWith(props.type)">
@@ -62,9 +62,22 @@ function getImage(type){
     </div>
 </template>
 <style scoped>
+.header {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.headline {
+    font-size: 50px;
+    position: absolute;
+    top: 0;
+    left: 75px;
+}
 .wrapper {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    padding: 12px;
 }
 
 img {
