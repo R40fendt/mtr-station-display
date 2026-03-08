@@ -43,7 +43,7 @@ const routeTypes=ref(["Zug","U","S","Tram","Bus","Fähre"]);
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    min-width: 500px;
+    min-width: 300px;
     height: 300px;
     margin-left: 20px;
     margin-right: 20px;
