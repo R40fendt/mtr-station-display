@@ -38,7 +38,9 @@ function formatDepartureSmart(arrival, currentTime) {
     });
 }
 const platformmapping={
-    "Zug": "Gl",
+    "ICE": "Gl",
+    "RB": "Gl",
+    "RE": "Gl",
     "U": "Gl",
     "S": "Gl",
     "Tram": "Hst",
@@ -48,24 +50,33 @@ const platformmapping={
 </script>
 <template>
     <div class="departurewrapper">
-        <span class="linie" :style="{'background-color':'#'+props.arrival.routeColor.toString(16).padStart(6,'0'), 'color': textColor() }">{{ props.arrival.routeNumber }}</span> <Laufschrift class="laufschrift" :text="props.arrival.destination"></Laufschrift> <span class="platformnumber">{{ platformmapping[props.type] }}. {{ props.arrival.platformName }}</span><span class="date">{{ formatDepartureSmart(props.arrival.arrival, props.currentTime) }}</span>
+        <span class="linie" :style="{'background-color':'#'+props.arrival.routeColor.toString(16).padStart(6,'0'), 'color': textColor() }">{{ props.arrival.routeNumber }}</span> <Laufschrift>{{ props.arrival.destination }}</Laufschrift> <span class="platformnumber">{{ platformmapping[props.type] }}. {{ props.arrival.platformName }}</span><span class="date">{{ formatDepartureSmart(props.arrival.arrival, props.currentTime) }}</span>
     </div>
 </template>
 <style scoped>
 .linie {
     padding: 2px;
     border-radius: 5px;
+    min-width: 100px;
+    text-align: center;
+    margin-right: 10px;
 }
 
 .departurewrapper{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    white-space: nowrap;
     font-size: 20px;
 }
 .date {
-    float: right;
-
+    margin-left: 10px;
+    min-width: 70px;
+    text-align: center;
 }
 .platformnumber {
-    float: right;
-    margin-left: 20px;
+    margin-left: auto;
+    min-width: 70px;
+    text-align: center;
 }
 </style>

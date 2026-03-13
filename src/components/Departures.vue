@@ -1,6 +1,7 @@
 <script setup lang="js">
 import { ref, defineProps } from 'vue';
 import Departure from './Departure.vue';
+import Laufschrift from './Laufschrift.vue';
 
 const arrivals=ref(undefined);
 const props=defineProps({
@@ -33,7 +34,9 @@ loadData().then(()=>{
     initialized.value=true;
 });
 const typeMapping={
-    "Zug": "Zug",
+    "ICE": "ICE",
+    "RB": "RB",
+    "RE": "RE",
     "U": "U-Bahn",
     "S": "S-Bahn",
     "Tram": "Straßenbahn",

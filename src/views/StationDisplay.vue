@@ -24,15 +24,15 @@ init().then(()=>{
     initialized.value=true;
 });
 
-const routeTypes=ref(["Zug","U","S","Tram","Bus","Fähre"]);
+const routeTypes=ref(["ICE","RB","RE","U","S","Tram","Bus","Fähre"]);
 </script>
 <template>
     <div v-if="!initialized">
         Initializing...
     </div>
     <div v-else>
-        <h1>Abfahrten {{ stationData.name }}</h1>
-        <div class="container"><Departures class="departures" :type="type" v-for="type in routeTypes" :routes="routeData.filter((s)=>s.name.startsWith(type))" :stationId="stationData.id"/></div>
+    <h1>Abfahrten {{ stationData.name }}</h1>
+    <div class="container"><Departures class="departures" :type="type" v-for="type in routeTypes" :routes="routeData.filter((s)=>s.name.startsWith(type))" :stationId="stationData.id"/></div>
         <div>
             <h2>Fahrplanauskunft und Liniennetz unter mtr.ritzenbergen.de</h2>
         </div>
@@ -44,6 +44,8 @@ const routeTypes=ref(["Zug","U","S","Tram","Bus","Fähre"]);
     flex-direction: column;
     margin-top: 20px;
     min-width: 300px;
+    width: 100%;
+    max-width: 600px;
     height: 300px;
     margin-left: 20px;
     margin-right: 20px;
